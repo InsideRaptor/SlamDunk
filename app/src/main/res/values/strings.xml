@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">SlamDunk</string>
+
+    <!--Splash-->
+    <string name="splash_title">SlamDunk</string>
+    <string name="splash_logo_content_description">splash logo</string>
+
+    <!--Login-->
+    <string name="login_title">SlamDunk</string>
+    <string name="login_app_description">Get access to all the NBA stats. Teams, players, games and more!</string>
+    <string name="login_text">Login to access your account and personal preferences.</string>
+    <string name="login_btn_text">Sign in with Google</string>
+    <string name="login_logo_content_description">login logo</string>
+
+    <!--Main-->
+
 </resources>
