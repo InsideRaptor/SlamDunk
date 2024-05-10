@@ -27,6 +27,7 @@
         android:letterSpacing="0.08"
         android:lineHeight="28sp"
         android:text="@string/splash_title"
+        android:textColor="@color/md_theme_onBackground"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

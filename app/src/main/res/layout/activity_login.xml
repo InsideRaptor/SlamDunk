@@ -14,11 +14,11 @@
         android:layout_marginStart="108dp"
         android:layout_marginTop="115dp"
         android:layout_marginEnd="108dp"
+        android:contentDescription="@string/login_logo_content_description"
         android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/login_logo_content_description" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/loginAppName"
@@ -31,6 +31,7 @@
         android:paddingTop="15dp"
         android:text="@string/login_title"
         android:textAlignment="center"
+        android:textColor="@color/md_theme_onBackground"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -47,9 +48,9 @@
         android:letterSpacing="0.03"
         android:text="@string/login_app_description"
         android:textAlignment="center"
+        android:textColor="@color/md_theme_primary"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginAppName" />
 
@@ -62,29 +63,42 @@
         android:fontFamily="@font/roboto"
         android:text="@string/login_text"
         android:textAlignment="center"
+        android:textColor="@color/md_theme_primary"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/dropShadow" />
 
-    <Button
-        android:id="@+id/btnLogin"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/dropShadow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="90dp"
-        android:width="264dp"
-        android:height="40dp"
-        android:drawableStart="@drawable/google_icon"
-        android:fontFamily="@font/roboto"
-        android:letterSpacing="0.06"
-        android:text="@string/login_btn_text"
-        android:textAlignment="center"
-        android:textSize="14sp"
-        app:cornerRadius="4dp"
-        app:iconGravity="start|textStart"
+        app:cardBackgroundColor="#00000000"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginAppDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/loginAppDescription">
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="264dp"
+            android:height="40dp"
+            android:backgroundTint="@color/md_theme_surfaceContainerLowest"
+            android:drawableStart="@drawable/google_icon"
+            android:fontFamily="@font/roboto"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:letterSpacing="0.06"
+            android:text="@string/login_btn_text"
+            android:textAlignment="center"
+            android:textColor="@color/md_theme_onSurfaceVariant"
+            android:textSize="14sp"
+            app:cornerRadius="4dp"
+            app:iconGravity="start|textStart" />
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
