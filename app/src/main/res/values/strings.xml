@@ -13,5 +13,20 @@
     <string name="login_logo_content_description">login logo</string>
 
     <!--Main-->
+    <string name="main_title_teams">Teams</string>
+    <string name="logout_button_content_description">logout</string>
+    <string name="back_button_content_description">back</string>
+
+    <!--List Item-->
+    <string name="bookmark_button_content_description">bookmark</string>
+    <string name="list_item_team_name">Team Name</string>
+    <string name="list_item_team_logo_content_description">team logo</string>
+
+    <!--Bookmarks-->
+    <string name="bookmarks_title">Bookmarks</string>
+
+    <!--Search-->
+    <string name="search_title">Search</string>
+
 
 </resources>
