@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="RoundSearchView" parent="Widget.AppCompat.SearchView">
+        <item name="colorControlNormal">@color/md_theme_surfaceContainer</item>
+        <!-- Customize the color of the search icon -->
+        <item name="android:searchIcon">@drawable/custom_search_icon</item>
+        <!-- Customize the color of the clear (X) icon -->
+        <item name="android:closeIcon">@drawable/custom_clear_icon</item>
+    </style>
+</resources>
