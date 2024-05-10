@@ -60,7 +60,7 @@
             android:closeIcon="@drawable/custom_clear_icon"
             android:iconifiedByDefault="false"
             android:queryBackground="@android:color/transparent"
-            android:queryHint="Search"
+            android:queryHint="Team Name"
             android:searchIcon="@drawable/custom_search_icon"
             android:theme="@style/RoundSearchView"
             app:layout_constraintEnd_toEndOf="parent"
