@@ -49,5 +49,8 @@
         <item name="colorSurfaceContainerHighest">@color/md_theme_surfaceContainerHighest</item>
     </style>
 
-    <style name="Theme.SlamDunk" parent="Base.Theme.SlamDunk" />
+    <style name="Theme.SlamDunk" parent="Base.Theme.SlamDunk">
+        <!-- Customize the color of the status bar -->
+        <item name="android:statusBarColor">@color/md_theme_background</item>
+    </style>
 </resources>
