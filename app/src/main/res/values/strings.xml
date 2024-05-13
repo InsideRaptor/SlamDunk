@@ -22,6 +22,9 @@
     <string name="list_item_team_name">Team Name</string>
     <string name="list_item_team_logo_content_description">team logo</string>
 
+    <!--List Item Bookmark-->
+    <string name="remove_button_content_description">remove</string>
+
     <!--Bookmarks-->
     <string name="bookmarks_title">Bookmarks</string>
 
