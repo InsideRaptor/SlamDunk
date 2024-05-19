@@ -5,8 +5,6 @@ import com.uade.slamdunk.model.Team
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.FileInputStream
-import java.util.Properties
 import com.uade.slamdunk.BuildConfig
 
 class NbaDataSource {
