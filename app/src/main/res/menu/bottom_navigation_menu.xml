@@ -10,9 +10,4 @@
         android:enabled="true"
         android:icon="@drawable/menu_home"
         android:title=""/>
-    <item
-        android:id="@+id/menu_search"
-        android:enabled="true"
-        android:icon="@drawable/menu_search"
-        android:title=""/>
 </menu>

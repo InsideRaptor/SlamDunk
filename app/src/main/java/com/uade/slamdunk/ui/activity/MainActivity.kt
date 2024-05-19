@@ -9,7 +9,6 @@ import com.uade.slamdunk.R
 import com.uade.slamdunk.ui.viewmodel.MainActivityViewModel
 import com.uade.slamdunk.ui.fragment.BookmarkFragment
 import com.uade.slamdunk.ui.fragment.HomeFragment
-import com.uade.slamdunk.ui.fragment.SearchFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,10 +40,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.menu_bookmark -> {
                     loadFragment(BookmarkFragment())
-                    true
-                }
-                R.id.menu_search -> {
-                    loadFragment(SearchFragment())
                     true
                 }
                 else -> false

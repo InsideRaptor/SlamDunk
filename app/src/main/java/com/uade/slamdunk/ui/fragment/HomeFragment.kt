@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +17,7 @@ class HomeFragment : Fragment() {
     private lateinit var viewModel: MainActivityViewModel
     private lateinit var rvMain: RecyclerView
     private lateinit var adapter: NbaAdapter
+    private lateinit var searchBar: SearchView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,11 +33,32 @@ class HomeFragment : Fragment() {
         adapter = NbaAdapter()
         rvMain.adapter = adapter
 
-        viewModel.teams.observe(viewLifecycleOwner) { teams ->
-            adapter.updateItems(teams)
+        searchBar = view.findViewById(R.id.searchView)
+        setupSearchBar()
+
+        viewModel.filteredTeams.observe(viewLifecycleOwner) { filteredTeams ->
+            adapter.updateItems(filteredTeams)
         }
 
         return view
+    }
+
+    private fun setupSearchBar() {
+        searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    viewModel.filterTeams(query)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) {
+                    viewModel.filterTeams(newText)
+                }
+                return true
+            }
+        })
     }
 
 }
