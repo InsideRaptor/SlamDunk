@@ -52,5 +52,7 @@
     <style name="Theme.SlamDunk" parent="Base.Theme.SlamDunk">
         <!-- Customize the color of the status bar -->
         <item name="android:statusBarColor">@color/md_theme_background</item>
+        <!-- Disable Splash Screen -->
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 </resources>
