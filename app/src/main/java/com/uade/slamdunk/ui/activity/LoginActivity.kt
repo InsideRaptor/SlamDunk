@@ -1,4 +1,4 @@
-package com.uade.slamdunk.ui
+package com.uade.slamdunk.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
