@@ -1,6 +1,8 @@
 package com.uade.slamdunk.ui.activity
 
 import android.os.Bundle
+import android.view.View
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -14,16 +16,29 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var bottomNav : BottomNavigationView
     private lateinit var viewModel: MainActivityViewModel
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        loadFragment(HomeFragment())
 
+        progressBar = findViewById(R.id.progressBar)
+
+        loadFragment(HomeFragment())
         bottomNavBar()
 
+        bindViewModel()
+
+    }
+
+    private fun bindViewModel() {
         viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
-        //viewModel.init()
+
+        viewModel.isLoading.observe(this) { isLoading ->
+            // Show or hide the progress bar based on the isLoading flag
+            progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        }
+
         viewModel.teams.observe(this) { teams ->
             // Do something with the fetched teams if needed
         }

@@ -23,22 +23,27 @@ class MainActivityViewModel : ViewModel() {
     var filteredTeams: MutableLiveData<ArrayList<Team>> = MutableLiveData<ArrayList<Team>>()
     var players: MutableLiveData<ArrayList<Player>> = MutableLiveData<ArrayList<Player>>()
 
+    var isLoading = MutableLiveData<Boolean>()
+
     init {
         fetchTeams()
     }
 
     // Recuperar a los equipos desde la API
     private fun fetchTeams() {
+        isLoading.value = true
         scope.launch {
             kotlin.runCatching {
                 nbaRepo.getTeams()
             }.onSuccess {
                 Log.d(TAG, "onSuccess")
+                isLoading.postValue(false)
                 teams.postValue(it)
                 filteredTeams.postValue(it)
                 Log.d(TAG, it.toString())
             }.onFailure {
                 Log.d(TAG, "Error: $it")
+                isLoading.postValue(false)
                 teams.postValue(ArrayList())
                 filteredTeams.postValue(ArrayList())
             }
