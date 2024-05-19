@@ -7,6 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.FileInputStream
 import java.util.Properties
+import com.uade.slamdunk.BuildConfig
 
 class NbaDataSource {
 
@@ -15,8 +16,7 @@ class NbaDataSource {
         //Constantes
         private const val BASE_URL = "https://v2.nba.api-sports.io/"
         private const val TAG = "NBA_API"
-        //private val API_KEY = loadPropertiesFile().getProperty("API_KEY")  TODO: averiguar xq no funca
-        private const val API_KEY = ""
+        private const val API_KEY = BuildConfig.API_KEY
 
         //Interceptor
         private val client: OkHttpClient = OkHttpClient.Builder()
@@ -68,14 +68,6 @@ class NbaDataSource {
                 Log.d(TAG, "Nba DataSource ERROR: ${result.message()}")
                 ArrayList<Player>()
             }
-        }
-
-        //Cargar archivo local.properties
-        private fun loadPropertiesFile(): Properties {
-            val properties = Properties()
-            val fileInputStream = FileInputStream("local.properties")
-            properties.load(fileInputStream)
-            return properties
         }
 
     }
