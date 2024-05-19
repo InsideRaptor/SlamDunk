@@ -4,7 +4,8 @@ data class Team (
     val id: Int,
     val name: String,
     val logo: String?,
-    val nbaFranchise: Boolean
+    val nbaFranchise: Boolean,
+    var isBookmarked: Boolean = false
 )
 
 data class JSONResponse (

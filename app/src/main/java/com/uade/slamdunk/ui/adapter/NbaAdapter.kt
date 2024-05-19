@@ -23,10 +23,28 @@ class NbaAdapter : RecyclerView.Adapter<NbaViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: NbaViewHolder, position: Int) {
+        // Get the team at the current position
         holder.teamName.text = teams[position].name
+
+        // Load the team logo using Glide
         Glide.with(holder.itemView.context)
             .load(teams[position].logo)
             .into(holder.teamLogo)
+
+        // Set bookmark icon based on bookmark status
+        holder.bookmarkButton.setImageResource(
+            if (teams[position].isBookmarked) R.drawable.bookmark_delete_icon else R.drawable.bookmark_add_icon
+        )
+
+        // Set click listener for the bookmark button
+        holder.bookmarkButton.setOnClickListener {
+            // Toggle bookmark status
+            teams[position].isBookmarked = !teams[position].isBookmarked
+            // Update icon
+            holder.bookmarkButton.setImageResource(
+                if (teams[position].isBookmarked) R.drawable.bookmark_delete_icon else R.drawable.bookmark_add_icon
+            )
+        }
     }
 
     fun updateItems(lista: MutableList<Team>) {
