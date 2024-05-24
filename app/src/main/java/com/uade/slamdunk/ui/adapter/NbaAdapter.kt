@@ -44,6 +44,8 @@ class NbaAdapter : RecyclerView.Adapter<NbaViewHolder>() {
             holder.bookmarkButton.setImageResource(
                 if (teams[position].isBookmarked) R.drawable.bookmark_delete_icon else R.drawable.bookmark_add_icon
             )
+            // Optionally, notify data set change if you want to update other UI components
+            //this.notifyDataSetChanged()
         }
     }
 

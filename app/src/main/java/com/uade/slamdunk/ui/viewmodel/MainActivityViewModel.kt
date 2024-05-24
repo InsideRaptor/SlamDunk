@@ -21,6 +21,7 @@ class MainActivityViewModel : ViewModel() {
     private val nbaRepo: NbaRepository = NbaRepository()
     var teams: MutableLiveData<ArrayList<Team>> = MutableLiveData<ArrayList<Team>>()
     var filteredTeams: MutableLiveData<ArrayList<Team>> = MutableLiveData<ArrayList<Team>>()
+    var bookmarkedTeams: MutableLiveData<ArrayList<Team>> = MutableLiveData<ArrayList<Team>>()
     var players: MutableLiveData<ArrayList<Player>> = MutableLiveData<ArrayList<Player>>()
 
     var isLoading = MutableLiveData<Boolean>()
@@ -40,12 +41,14 @@ class MainActivityViewModel : ViewModel() {
                 isLoading.postValue(false)
                 teams.postValue(it)
                 filteredTeams.postValue(it)
+                updateBookmarkedTeams()
                 Log.d(TAG, it.toString())
             }.onFailure {
                 Log.d(TAG, "Error: $it")
                 isLoading.postValue(false)
                 teams.postValue(ArrayList())
                 filteredTeams.postValue(ArrayList())
+                bookmarkedTeams.postValue(ArrayList())
             }
         }
     }
@@ -54,6 +57,13 @@ class MainActivityViewModel : ViewModel() {
             it.name.contains(query, ignoreCase = true)
         } ?: ArrayList()
         filteredTeams.postValue(filteredList as ArrayList<Team>?)
+    }
+
+    fun updateBookmarkedTeams() {
+        val bookmarkedList = teams.value?.filter {
+            it.isBookmarked
+        } ?: ArrayList()
+        bookmarkedTeams.postValue(bookmarkedList as ArrayList<Team>?)
     }
 
     override fun onCleared() {
