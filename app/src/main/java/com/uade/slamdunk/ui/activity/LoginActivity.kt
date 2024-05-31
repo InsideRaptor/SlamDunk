@@ -25,11 +25,12 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(com.firebase.ui.auth.R.string.default_web_client_id))
+            .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions)
         firebaseAuth = FirebaseAuth.getInstance()
+
         loginButton = findViewById(R.id.btnLogin)
 
         loginButton.setOnClickListener(){
@@ -52,7 +53,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun firebaseAuthWithGoogleAccount(account: GoogleSignInAccount) {
+    private fun firebaseAuthWithGoogleAccount(account: GoogleSignInAccount?) {
         val credential = GoogleAuthProvider.getCredential(account!!.idToken, null)
         firebaseAuth.signInWithCredential(credential)
             .addOnSuccessListener {authResult ->
