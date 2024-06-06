@@ -33,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
 
         loginButton = findViewById(R.id.btnLogin)
 
-        loginButton.setOnClickListener(){
+        loginButton.setOnClickListener {
             val intent = googleSignInClient.signInIntent
             startActivityForResult(intent, 100)
         }
@@ -48,19 +48,15 @@ class LoginActivity : AppCompatActivity() {
                 val account = accountTask.getResult(ApiException::class.java)
                 firebaseAuthWithGoogleAccount(account)
             } catch (e: Exception) {
-                Log.d("EXCEPTIONTAG", "onActivityResult: ${e.message}")
+                Log.d("NBA_API", "onActivityResult: ${e.message}")
             }
         }
     }
 
     private fun firebaseAuthWithGoogleAccount(account: GoogleSignInAccount?) {
-        val credential = GoogleAuthProvider.getCredential(account!!.idToken, null)
+        val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
         firebaseAuth.signInWithCredential(credential)
             .addOnSuccessListener {authResult ->
-                val firebaseUser = firebaseAuth.currentUser
-                val uid = firebaseUser!!.uid
-                val email = firebaseUser!!.email
-
                 if (authResult.additionalUserInfo!!.isNewUser) {
                     //Crear Account
                     Toast.makeText(this@LoginActivity, "Cuenta creada...", Toast.LENGTH_LONG).show()
@@ -72,7 +68,7 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                 finish()
             }
-            .addOnFailureListener {e ->
+            .addOnFailureListener {
                 Toast.makeText(this@LoginActivity, "Login fallido...", Toast.LENGTH_LONG).show()
             }
     }
