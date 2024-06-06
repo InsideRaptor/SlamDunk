@@ -1,17 +1,27 @@
+package com.uade.slamdunk.data
+
+import android.annotation.SuppressLint
 import android.util.Log
-import com.uade.slamdunk.data.NbaAPI
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.uade.slamdunk.model.Player
 import com.uade.slamdunk.model.Team
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import com.uade.slamdunk.BuildConfig
+import kotlinx.coroutines.tasks.await
 
 class NbaDataSource {
 
     companion object {
 
         //Constantes
+        @SuppressLint("StaticFieldLeak")
+        private val db = FirebaseFirestore.getInstance()
+        private val firebaseAuth = FirebaseAuth.getInstance()
+        private val email = firebaseAuth.currentUser?.email
+
         private const val BASE_URL = "https://v2.nba.api-sports.io/"
         private const val TAG = "NBA_API"
         private const val API_KEY = BuildConfig.API_KEY
@@ -65,6 +75,32 @@ class NbaDataSource {
             } else {
                 Log.d(TAG, "Nba DataSource ERROR: ${result.message()}")
                 ArrayList<Player>()
+            }
+        }
+
+        suspend fun setFavs(team: Team) {
+            if (email != null) {
+                db.collection("favUsuarios")
+                    .document(email).collection("favoritos")
+                    .document()
+                    .set(team.id)
+                    .addOnSuccessListener {
+                        Log.d(TAG, "Team successfully bookmarked!")
+                    }
+                    .addOnFailureListener { e ->
+                        Log.w(TAG, "Error bookmarking team", e)
+                    }
+                    .await()
+            }
+
+        }
+
+        suspend fun getFavs() {
+            if (email != null) {
+                db.collection("favUsuarios")
+                    .document(email)
+                    .collection("favoritos")
+                    .get()
             }
         }
 
