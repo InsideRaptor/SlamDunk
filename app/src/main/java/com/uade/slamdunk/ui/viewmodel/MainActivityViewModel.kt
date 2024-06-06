@@ -41,7 +41,8 @@ class MainActivityViewModel : ViewModel() {
                 isLoading.postValue(false)
                 teams.postValue(it)
                 filteredTeams.postValue(it)
-                updateBookmarkedTeams()
+                //updateBookmarkedTeams()
+                //bookmarkedTeams.postValue(it)
                 Log.d(TAG, it.toString())
             }.onFailure {
                 Log.d(TAG, "Error: $it")
