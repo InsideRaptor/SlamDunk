@@ -6,7 +6,10 @@ data class Team (
     val logo: String?,
     val nbaFranchise: Boolean,
     var isBookmarked: Boolean = false
-)
+) {
+    // Default constructor required for Firestore deserialization
+    constructor() : this(0, "", "", false)
+}
 
 data class JSONResponse (
     val response: List<Team>
