@@ -28,6 +28,7 @@ class MainActivityViewModel : ViewModel() {
 
     init {
         fetchTeams()
+        fetchBookmarkedTeams()
     }
 
     // Recuperar a los equipos desde la API
@@ -41,15 +42,12 @@ class MainActivityViewModel : ViewModel() {
                 isLoading.postValue(false)
                 teams.postValue(it)
                 filteredTeams.postValue(it)
-                //updateBookmarkedTeams()
-                //bookmarkedTeams.postValue(it)
                 Log.d(TAG, it.toString())
             }.onFailure {
                 Log.d(TAG, "Error: $it")
                 isLoading.postValue(false)
                 teams.postValue(ArrayList())
                 filteredTeams.postValue(ArrayList())
-                bookmarkedTeams.postValue(ArrayList())
             }
         }
     }
@@ -60,7 +58,25 @@ class MainActivityViewModel : ViewModel() {
         filteredTeams.postValue(filteredList as ArrayList<Team>?)
     }
 
-    fun updateBookmarkedTeams() {
+    private fun fetchBookmarkedTeams() {
+        scope.launch {
+            val bookmarkedList = nbaRepo.getFavs()
+            bookmarkedTeams.postValue(ArrayList(bookmarkedList))
+        }
+    }
+
+    fun toggleBookmark(team: Team) {
+        scope.launch {
+            if (team.isBookmarked) {
+                nbaRepo.setFav(team)
+            } else {
+                nbaRepo.removeFav(team)
+            }
+            updateBookmarkedTeams()
+        }
+    }
+
+    private fun updateBookmarkedTeams() {
         val bookmarkedList = teams.value?.filter {
             it.isBookmarked
         } ?: ArrayList()

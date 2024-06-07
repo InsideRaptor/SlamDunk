@@ -7,11 +7,14 @@ import com.bumptech.glide.Glide
 import com.uade.slamdunk.R
 import com.uade.slamdunk.model.Team
 import com.uade.slamdunk.ui.viewholder.NbaViewHolder
+import com.uade.slamdunk.ui.viewmodel.MainActivityViewModel
 
 class NbaAdapter : RecyclerView.Adapter<NbaViewHolder>() {
 
     // List of teams
     private var teams: MutableList<Team> = ArrayList<Team>()
+    // ViewModel
+    private val viewModel = MainActivityViewModel()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NbaViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
@@ -44,8 +47,9 @@ class NbaAdapter : RecyclerView.Adapter<NbaViewHolder>() {
             holder.bookmarkButton.setImageResource(
                 if (teams[position].isBookmarked) R.drawable.bookmark_delete_icon else R.drawable.bookmark_add_icon
             )
-            // Optionally, notify data set change if you want to update other UI components
-            //this.notifyDataSetChanged()
+            // Update ViewModel
+            viewModel.toggleBookmark(teams[position])
+            notifyItemChanged(position)
         }
     }
 
