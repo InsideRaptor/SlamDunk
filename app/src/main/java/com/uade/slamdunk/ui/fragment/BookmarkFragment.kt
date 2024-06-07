@@ -31,14 +31,18 @@ class BookmarkFragment : Fragment() {
         adapter = NbaAdapter()
         rvBookmarks.adapter = adapter
 
-        //viewModel.updateBookmarkedTeams()
-
-        viewModel.bookmarkedTeams.observe(viewLifecycleOwner) { bookmarkedTeams ->
-
+/*        viewModel.bookmarkedTeams.observe(viewLifecycleOwner) { bookmarkedTeams ->
             adapter.updateItems(bookmarkedTeams)
-        }
+        }*/
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.bookmarkedTeams.observe(viewLifecycleOwner) { bookmarkedTeams ->
+            adapter.updateItems(bookmarkedTeams)
+        }
     }
 
 }
