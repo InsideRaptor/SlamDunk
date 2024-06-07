@@ -20,7 +20,7 @@ class NbaDataSource {
         @SuppressLint("StaticFieldLeak")
         private val db = FirebaseFirestore.getInstance()
         private val firebaseAuth = FirebaseAuth.getInstance()
-        private val email = firebaseAuth.currentUser?.email
+        private val uid = firebaseAuth.currentUser?.uid
 
         private const val BASE_URL = "https://v2.nba.api-sports.io/"
         private const val TAG = "NBA_API"
@@ -78,12 +78,12 @@ class NbaDataSource {
             }
         }
 
-        suspend fun setFavs(team: Team) {
-            if (email != null) {
+        suspend fun setFav(team: Team) {
+            if (uid != null) {
                 db.collection("favUsuarios")
-                    .document(email).collection("favoritos")
-                    .document()
-                    .set(team.id)
+                    .document(uid).collection("favoritos")
+                    .document(team.id.toString())
+                    .set(team)
                     .addOnSuccessListener {
                         Log.d(TAG, "Team successfully bookmarked!")
                     }
@@ -92,15 +92,35 @@ class NbaDataSource {
                     }
                     .await()
             }
-
         }
 
-        suspend fun getFavs() {
-            if (email != null) {
-                db.collection("favUsuarios")
-                    .document(email)
-                    .collection("favoritos")
+        suspend fun getFavs(): List<Team> {
+            return if (uid != null) {
+                val snapshot = db.collection("favUsuarios")
+                    .document(uid).collection("favoritos")
                     .get()
+                    .await()
+                snapshot.documents.mapNotNull { doc ->
+                    doc.toObject(Team::class.java)
+                }
+            } else {
+                emptyList()
+            }
+        }
+
+        suspend fun removeFav(team: Team) {
+            if (uid != null) {
+                db.collection("favUsuarios")
+                    .document(uid).collection("favoritos")
+                    .document(team.id.toString())
+                    .delete()
+                    .addOnSuccessListener {
+                        Log.d(TAG, "Team successfully removed from bookmarks!")
+                    }
+                    .addOnFailureListener { e ->
+                        Log.w(TAG, "Error removing team from bookmarks", e)
+                    }
+                    .await()
             }
         }
 
