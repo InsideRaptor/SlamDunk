@@ -12,11 +12,12 @@ import com.uade.slamdunk.R
 import com.uade.slamdunk.ui.adapter.NbaAdapter
 import com.uade.slamdunk.ui.viewmodel.MainActivityViewModel
 
-private lateinit var viewModel: MainActivityViewModel
-private lateinit var rvBookmarks: RecyclerView
-private lateinit var adapter: NbaAdapter
-
 class BookmarkFragment : Fragment() {
+
+    private lateinit var viewModel: MainActivityViewModel
+    private lateinit var rvBookmarks: RecyclerView
+    private lateinit var adapter: NbaAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,21 +29,14 @@ class BookmarkFragment : Fragment() {
         rvBookmarks = view.findViewById(R.id.rvBookmarks)
         rvBookmarks.layoutManager = LinearLayoutManager(requireContext())
 
-        adapter = NbaAdapter()
+        adapter = NbaAdapter(viewModel)
         rvBookmarks.adapter = adapter
 
-/*        viewModel.bookmarkedTeams.observe(viewLifecycleOwner) { bookmarkedTeams ->
-            adapter.updateItems(bookmarkedTeams)
-        }*/
-
-        return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         viewModel.bookmarkedTeams.observe(viewLifecycleOwner) { bookmarkedTeams ->
             adapter.updateItems(bookmarkedTeams)
         }
+
+        return view
     }
 
 }
