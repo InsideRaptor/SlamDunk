@@ -34,8 +34,11 @@ class LoginActivity : AppCompatActivity() {
         loginButton = findViewById(R.id.btnLogin)
 
         loginButton.setOnClickListener {
-            val intent = googleSignInClient.signInIntent
-            startActivityForResult(intent, 100)
+            // Sign out before starting sign-in flow to prompt account chooser
+            googleSignInClient.signOut().addOnCompleteListener {
+                val intent = googleSignInClient.signInIntent
+                startActivityForResult(intent, 100)
+            }
         }
     }
 
