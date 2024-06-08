@@ -30,7 +30,7 @@ class HomeFragment : Fragment() {
         rvMain = view.findViewById(R.id.rvMain)
         rvMain.layoutManager = LinearLayoutManager(requireContext())
 
-        adapter = NbaAdapter()
+        adapter = NbaAdapter(viewModel)
         rvMain.adapter = adapter
 
         searchBar = view.findViewById(R.id.searchView)
