@@ -1,5 +1,6 @@
 package com.uade.slamdunk.ui.activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -11,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.uade.slamdunk.R
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
 
     private lateinit var firebaseAuth: FirebaseAuth
@@ -39,7 +41,7 @@ class SplashActivity : AppCompatActivity() {
 
     private fun navigateToLogin() {
         Handler(Looper.getMainLooper()).postDelayed({
-            var intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }, 4000)
@@ -47,7 +49,7 @@ class SplashActivity : AppCompatActivity() {
 
     private fun navigateToMainContent() {
         Handler(Looper.getMainLooper()).postDelayed({
-            var intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }, 4000)
