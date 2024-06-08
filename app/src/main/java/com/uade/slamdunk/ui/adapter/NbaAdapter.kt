@@ -1,5 +1,6 @@
 package com.uade.slamdunk.ui.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -51,6 +52,7 @@ class NbaAdapter(private val viewModel: MainActivityViewModel) : RecyclerView.Ad
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateItems(lista: MutableList<Team>) {
         teams = lista
         this.notifyDataSetChanged()
