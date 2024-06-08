@@ -16,7 +16,7 @@ class MainActivityViewModel : ViewModel() {
     private val job = Job()
     private val scope = CoroutineScope(Dispatchers.Main + job)
 
-    val TAG = "NBA_API"
+    private val tag = "NBA_API"
 
     private val nbaRepo: NbaRepository = NbaRepository()
     var teams: MutableLiveData<ArrayList<Team>> = MutableLiveData<ArrayList<Team>>()
@@ -28,7 +28,6 @@ class MainActivityViewModel : ViewModel() {
 
     init {
         fetchTeams()
-        fetchBookmarkedTeams()
     }
 
     // Recuperar a los equipos desde la API
@@ -38,13 +37,14 @@ class MainActivityViewModel : ViewModel() {
             kotlin.runCatching {
                 nbaRepo.getTeams()
             }.onSuccess {
-                Log.d(TAG, "onSuccess")
+                Log.d(tag, "onSuccess")
                 isLoading.postValue(false)
                 teams.postValue(it)
                 filteredTeams.postValue(it)
-                Log.d(TAG, it.toString())
+                fetchBookmarkedTeams()
+                Log.d(tag, it.toString())
             }.onFailure {
-                Log.d(TAG, "Error: $it")
+                Log.d(tag, "Error: $it")
                 isLoading.postValue(false)
                 teams.postValue(ArrayList())
                 filteredTeams.postValue(ArrayList())
@@ -61,6 +61,19 @@ class MainActivityViewModel : ViewModel() {
     private fun fetchBookmarkedTeams() {
         scope.launch {
             val bookmarkedList = nbaRepo.getFavs()
+            val bookmarkedIds = bookmarkedList.map { it.id }.toSet()
+
+            // Get the current list of teams
+            val currentTeams = teams.value ?: ArrayList()
+
+            // Update the bookmark status of the current teams
+            currentTeams.forEach { team ->
+                team.isBookmarked = bookmarkedIds.contains(team.id)
+            }
+
+            // Post the updated list to the LiveData
+            teams.postValue(currentTeams)
+            filteredTeams.postValue(currentTeams)
             bookmarkedTeams.postValue(ArrayList(bookmarkedList))
         }
     }
@@ -72,15 +85,14 @@ class MainActivityViewModel : ViewModel() {
             } else {
                 nbaRepo.removeFav(team)
             }
-            updateBookmarkedTeams()
-        }
-    }
+            val currentTeams = teams.value ?: ArrayList()
+            currentTeams.find { it.id == team.id }?.isBookmarked = team.isBookmarked
+            teams.postValue(currentTeams)
+            filteredTeams.postValue(currentTeams)
 
-    private fun updateBookmarkedTeams() {
-        val bookmarkedList = teams.value?.filter {
-            it.isBookmarked
-        } ?: ArrayList()
-        bookmarkedTeams.postValue(bookmarkedList as ArrayList<Team>?)
+            // Refresh bookmarks
+            fetchBookmarkedTeams()
+        }
     }
 
     override fun onCleared() {
