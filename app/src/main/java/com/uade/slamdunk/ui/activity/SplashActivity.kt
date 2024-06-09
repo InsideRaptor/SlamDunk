@@ -1,7 +1,6 @@
 package com.uade.slamdunk.ui.activity
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -28,16 +27,7 @@ class SplashActivity : AppCompatActivity() {
             insets
         }
 
-        // Check if this is the first launch
-        val isFirstLaunch = isFirstLaunch()
-
-        // If it's the first launch, show the splash screen with delay
-        if (isFirstLaunch) {
-            navigateToNextActivityDelayed()
-        } else {
-            // If it's not the first launch, directly navigate to the next activity
             navigateToNextActivity()
-        }
 
     }
 
@@ -68,19 +58,4 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateToNextActivityDelayed() {
-        Handler(Looper.getMainLooper()).postDelayed({
-            navigateToNextActivity()
-        }, 4000)
-    }
-
-    private fun isFirstLaunch(): Boolean {
-        val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        val isFirstLaunch = sharedPreferences.getBoolean("isFirstLaunch", true)
-        if (isFirstLaunch) {
-            // Set the flag to false to indicate that it's not the first launch anymore
-            sharedPreferences.edit().putBoolean("isFirstLaunch", false).apply()
-        }
-        return isFirstLaunch
-    }
 }
