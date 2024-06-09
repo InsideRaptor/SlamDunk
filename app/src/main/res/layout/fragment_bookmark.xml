@@ -36,18 +36,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageButton
-                android:id="@+id/btnBackBookmarks"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:backgroundTint="#00000000"
-                android:contentDescription="@string/back_button_content_description"
-                android:src="@drawable/back_icon"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/md_theme_onSurface" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
