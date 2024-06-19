@@ -15,7 +15,6 @@
     <!--Main-->
     <string name="main_title_teams">Teams</string>
     <string name="logout_button_content_description">logout</string>
-    <string name="back_button_content_description">back</string>
 
     <!--List Item-->
     <string name="bookmark_button_content_description">bookmark</string>
@@ -30,6 +29,12 @@
 
     <!--Search-->
     <string name="search_title">Search</string>
+
+    <!--Detail-->
+    <string name="detail_title">Detail</string>
+    <string name="back_button_content_description">back</string>
+    <string name="team_stats">Team Stats</string>
+    <string name="players">Players</string>
 
 
 </resources>
