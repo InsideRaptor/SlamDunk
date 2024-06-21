@@ -67,13 +67,15 @@ class NbaDataSource {
         suspend fun getPlayers(teamId: Int): ArrayList<Player> {
             Log.d(TAG, "Nba DataSource GET")
 
-            val result = api.getPlayers(teamId).execute()
-
-            return if (result.isSuccessful) {
+            return try {
+                val response = api.getPlayers(teamId)
                 Log.d(TAG, "Nba DataSource SUCCESS")
-                result.body() ?: ArrayList<Player>()
-            } else {
-                Log.d(TAG, "Nba DataSource ERROR: ${result.message()}")
+                Log.d(TAG, response.toString())
+
+                ArrayList(response.response)
+
+            } catch (e: Exception) {
+                Log.d(TAG, "Nba DataSource ERROR: ${e.message}")
                 ArrayList<Player>()
             }
         }
