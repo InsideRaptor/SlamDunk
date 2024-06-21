@@ -35,6 +35,9 @@
     <string name="back_button_content_description">back</string>
     <string name="team_stats">Team Stats</string>
     <string name="players">Players</string>
+    <string name="list_item_player_name">Player Name</string>
+
+    <string name="player_full_name">%1$s %2$s</string>
 
 
 </resources>

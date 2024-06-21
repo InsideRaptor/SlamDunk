@@ -25,7 +25,8 @@ class PlayerAdapter : RecyclerView.Adapter<PlayerViewHolder>() {
 
     override fun onBindViewHolder(holder: PlayerViewHolder, position: Int) {
         val player = players[position]
-        holder.playerName.text = player.firstname
+        val context = holder.itemView.context
+        holder.playerName.text = context.getString(R.string.player_full_name, player.firstname, player.lastname)
     }
 
     @SuppressLint("NotifyDataSetChanged")
