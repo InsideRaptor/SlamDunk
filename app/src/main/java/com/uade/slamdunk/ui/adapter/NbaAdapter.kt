@@ -1,12 +1,15 @@
 package com.uade.slamdunk.ui.adapter
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.uade.slamdunk.R
 import com.uade.slamdunk.model.Team
+import com.uade.slamdunk.ui.activity.DetailActivity
 import com.uade.slamdunk.ui.viewholder.NbaViewHolder
 import com.uade.slamdunk.ui.viewmodel.MainActivityViewModel
 
@@ -49,6 +52,15 @@ class NbaAdapter(private val viewModel: MainActivityViewModel) : RecyclerView.Ad
             // Update ViewModel
             viewModel.toggleBookmark(teams[position])
             notifyItemChanged(position)
+        }
+
+        holder.teamNameButton.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(context, DetailActivity::class.java).apply {
+                putExtra("TEAM_ID", teams[position].id)
+                Log.d("NBA_API", "Selected Team ID: ${teams[position].id}")
+            }
+            context.startActivity(intent)
         }
     }
 
