@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.uade.slamdunk.R
 import com.uade.slamdunk.ui.adapter.PlayerAdapter
@@ -27,7 +27,7 @@ class DetailActivity : AppCompatActivity() {
 
 
         rvPlayers = findViewById(R.id.rvPlayers)
-        rvPlayers.layoutManager = LinearLayoutManager(this)
+        rvPlayers.layoutManager = GridLayoutManager(this, 2)
 
         adapter = PlayerAdapter()
         rvPlayers.adapter = adapter
