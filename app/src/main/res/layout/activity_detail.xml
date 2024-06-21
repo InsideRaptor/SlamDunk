@@ -84,7 +84,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/playerCard"
                 android:layout_width="300dp"
-                android:layout_height="wrap_content"
+                android:layout_height="500dp"
                 android:layout_marginTop="-20dp"
                 app:cardBackgroundColor="@color/md_theme_inversePrimary"
                 app:cardCornerRadius="10dp"
@@ -113,8 +113,8 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvPlayers"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
                         android:layout_marginBottom="25dp"
                         android:paddingHorizontal="10dp"
                         android:paddingVertical="10dp"
