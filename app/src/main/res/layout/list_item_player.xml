@@ -22,33 +22,18 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/playerNumber"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_medium"
-                android:paddingHorizontal="5dp"
-                android:text="1"
-                android:textAlignment="center"
-                android:textColor="@color/md_theme_onPrimaryContainer"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/playerName"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
                 android:id="@+id/playerName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_medium"
                 android:paddingHorizontal="5dp"
-                android:text="Player Name"
+                android:text="@string/player_full_name"
                 android:textAlignment="center"
                 android:textColor="@color/md_theme_onPrimaryContainer"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/playerNumber"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
