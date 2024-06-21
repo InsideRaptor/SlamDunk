@@ -22,7 +22,6 @@ class MainActivityViewModel : ViewModel() {
     var teams: MutableLiveData<ArrayList<Team>> = MutableLiveData<ArrayList<Team>>()
     var filteredTeams: MutableLiveData<ArrayList<Team>> = MutableLiveData<ArrayList<Team>>()
     var bookmarkedTeams: MutableLiveData<ArrayList<Team>> = MutableLiveData<ArrayList<Team>>()
-    var players: MutableLiveData<ArrayList<Player>> = MutableLiveData<ArrayList<Player>>()
 
     var isLoading = MutableLiveData<Boolean>()
 
@@ -37,7 +36,7 @@ class MainActivityViewModel : ViewModel() {
             kotlin.runCatching {
                 nbaRepo.getTeams()
             }.onSuccess {
-                Log.d(tag, "onSuccess")
+                Log.d(tag, "onSuccessTeams")
                 isLoading.postValue(false)
                 teams.postValue(it)
                 filteredTeams.postValue(it)
@@ -51,6 +50,7 @@ class MainActivityViewModel : ViewModel() {
             }
         }
     }
+
     fun filterTeams(query: String) {
         val filteredList = teams.value?.filter {
             it.name.contains(query, ignoreCase = true)
