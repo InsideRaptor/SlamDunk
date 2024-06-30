@@ -58,7 +58,11 @@ class NbaAdapter(private val viewModel: MainActivityViewModel) : RecyclerView.Ad
             val context = holder.itemView.context
             val intent = Intent(context, DetailActivity::class.java).apply {
                 putExtra("TEAM_ID", teams[position].id)
+                putExtra("TEAM_NAME", teams[position].name)
+                putExtra("TEAM_LOGO", teams[position].logo)
                 Log.d("NBA_API", "Selected Team ID: ${teams[position].id}")
+                Log.d("NBA_API", "Selected Team Name: ${teams[position].name}")
+                Log.d("NBA_API", "Selected Team Logo: ${teams[position].logo}")
             }
             context.startActivity(intent)
         }
