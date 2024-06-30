@@ -2,12 +2,11 @@ package com.uade.slamdunk.ui.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.uade.slamdunk.R
 import com.uade.slamdunk.model.Player
+import com.uade.slamdunk.ui.viewholder.PlayerViewHolder
 
 class PlayerAdapter : RecyclerView.Adapter<PlayerViewHolder>() {
 
@@ -34,8 +33,4 @@ class PlayerAdapter : RecyclerView.Adapter<PlayerViewHolder>() {
         players = lista
         this.notifyDataSetChanged()
     }
-}
-
-class PlayerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val playerName: TextView = itemView.findViewById(R.id.playerName)
 }
