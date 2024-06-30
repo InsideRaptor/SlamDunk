@@ -20,7 +20,7 @@ class NbaRepository {
         return NbaDataSource.removeFav(team)
     }
 
-/*    suspend fun getPlayers(teamId: Int) : ArrayList<Player> {
+    suspend fun getPlayers(teamId: Int) : ArrayList<Player> {
         return NbaDataSource.getPlayers(teamId)
-    }*/
+    }
 }

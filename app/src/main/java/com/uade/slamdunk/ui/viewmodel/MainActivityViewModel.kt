@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.uade.slamdunk.data.NbaRepository
-import com.uade.slamdunk.model.Player
 import com.uade.slamdunk.model.Team
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +21,6 @@ class MainActivityViewModel : ViewModel() {
     var teams: MutableLiveData<ArrayList<Team>> = MutableLiveData<ArrayList<Team>>()
     var filteredTeams: MutableLiveData<ArrayList<Team>> = MutableLiveData<ArrayList<Team>>()
     var bookmarkedTeams: MutableLiveData<ArrayList<Team>> = MutableLiveData<ArrayList<Team>>()
-    var players: MutableLiveData<ArrayList<Player>> = MutableLiveData<ArrayList<Player>>()
 
     var isLoading = MutableLiveData<Boolean>()
 
@@ -37,7 +35,7 @@ class MainActivityViewModel : ViewModel() {
             kotlin.runCatching {
                 nbaRepo.getTeams()
             }.onSuccess {
-                Log.d(tag, "onSuccess")
+                Log.d(tag, "onSuccessTeams")
                 isLoading.postValue(false)
                 teams.postValue(it)
                 filteredTeams.postValue(it)
@@ -51,6 +49,7 @@ class MainActivityViewModel : ViewModel() {
             }
         }
     }
+
     fun filterTeams(query: String) {
         val filteredList = teams.value?.filter {
             it.name.contains(query, ignoreCase = true)

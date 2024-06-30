@@ -34,3 +34,7 @@ data class Weight(
     val kilograms: String
 )
 
+data class JSONResponsePlayer (
+    val response: List<Player>
+)
+
