@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -87,7 +88,7 @@ object DetailActivityLauncher {
             context.startActivity(intent)
 
             // Reset the flag after starting the activity
-            Handler().postDelayed({
+            Handler(Looper.getMainLooper()).postDelayed({
                 isDetailActivityOpen = false
             }, 1000) // Adjust delay time as necessary
         }
