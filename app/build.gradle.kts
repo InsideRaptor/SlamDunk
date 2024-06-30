@@ -70,6 +70,7 @@ dependencies {
     implementation(libs.androidx.credentials.play.services.auth)
     implementation(libs.androidx.room.runtime)
     implementation(libs.firebase.firestore.ktx)
+    implementation(libs.androidx.room.ktx)
     annotationProcessor(libs.androidx.room.compiler)
     kapt (libs.androidx.room.compiler)
     testImplementation(libs.junit)
