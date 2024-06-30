@@ -20,11 +20,15 @@ class DetailViewModel : ViewModel() {
     private val nbaRepo: NbaRepository = NbaRepository()
     var players: MutableLiveData<ArrayList<Player>> = MutableLiveData<ArrayList<Player>>()
     private val selectedTeamId: MutableLiveData<Int> = MutableLiveData()
+    val selectedTeamName: MutableLiveData<String> = MutableLiveData()
+    val selectedTeamLogo: MutableLiveData<String> = MutableLiveData()
 
     var isLoading = MutableLiveData<Boolean>()
 
-    fun setTeamId(teamId: Int) {
+    fun setTeam(teamId: Int, teamName: String, teamLogo: String) {
         selectedTeamId.value = teamId
+        selectedTeamName.value = teamName
+        selectedTeamLogo.value = teamLogo
         fetchPlayers(teamId)
     }
 
