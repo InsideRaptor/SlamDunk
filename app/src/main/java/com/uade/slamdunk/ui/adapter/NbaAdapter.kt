@@ -1,7 +1,9 @@
 package com.uade.slamdunk.ui.adapter
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -55,16 +57,7 @@ class NbaAdapter(private val viewModel: MainActivityViewModel) : RecyclerView.Ad
         }
 
         holder.teamNameButton.setOnClickListener {
-            val context = holder.itemView.context
-            val intent = Intent(context, DetailActivity::class.java).apply {
-                putExtra("TEAM_ID", teams[position].id)
-                putExtra("TEAM_NAME", teams[position].name)
-                putExtra("TEAM_LOGO", teams[position].logo)
-                Log.d("NBA_API", "Selected Team ID: ${teams[position].id}")
-                Log.d("NBA_API", "Selected Team Name: ${teams[position].name}")
-                Log.d("NBA_API", "Selected Team Logo: ${teams[position].logo}")
-            }
-            context.startActivity(intent)
+            DetailActivityLauncher.launchDetailActivity(holder.itemView.context, teams[position])
         }
     }
 
@@ -74,4 +67,29 @@ class NbaAdapter(private val viewModel: MainActivityViewModel) : RecyclerView.Ad
         this.notifyDataSetChanged()
     }
 
+}
+
+object DetailActivityLauncher {
+    private var isDetailActivityOpen = false
+
+    fun launchDetailActivity(context: Context, team: Team) {
+        if (!isDetailActivityOpen) {
+            isDetailActivityOpen = true
+
+            val intent = Intent(context, DetailActivity::class.java).apply {
+                putExtra("TEAM_ID", team.id)
+                putExtra("TEAM_NAME", team.name)
+                putExtra("TEAM_LOGO", team.logo)
+                Log.d("NBA_API", "Selected Team ID: ${team.id}")
+                Log.d("NBA_API", "Selected Team Name: ${team.name}")
+                Log.d("NBA_API", "Selected Team Logo: ${team.logo}")
+            }
+            context.startActivity(intent)
+
+            // Reset the flag after starting the activity
+            Handler().postDelayed({
+                isDetailActivityOpen = false
+            }, 1000) // Adjust delay time as necessary
+        }
+    }
 }
